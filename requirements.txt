@@ -28,8 +28,5 @@ soupsieve==2.0.1
 threadpoolctl==2.1.0
 urllib3==1.25.9
 xlrd==2.0.1
-
 pymorphy2==0.9.1
 nltk==3.5
-
-

@@ -2,20 +2,51 @@ import requests
 from serpwow.google_search_results import GoogleSearchResults
 import json
 
-# create the serpwow object, passing in our API key
-serpwow = GoogleSearchResults("9B865C39F952484AAE51D0283C79C735")
 
-# set up a dict for the search parameters
-params = {
-    "q" : "разработка прототипа приложения",
-    "engine" : "yandex"
-}
+class CandidatesSearcher(object):
+    """
+    """
 
-# retrieve the search results as JSON
-result = serpwow.get_json(params)
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+        self.engines = ["yandex", "google"]
 
-# pretty-print the result
-print(json.dumps(result, indent=2, sort_keys=True))
+    def serpwow_request(self, keywords: str, engine: str) -> dict:
+        """
+        """
+        serpwow = GoogleSearchResults(self.api_key)
+        params = {
+            "q": keywords,
+            "engine": engine
+        }                                                 
+        return serpwow.get_json(params)
+    
+    def parser(self, data: dict) -> list:
+        """
+        """
+        results = list()
+        for result in data["organic_results"]:
+            results.append(
+                    {
+                        "domain": result["domain"],
+                        "link": result["link"],
+                        "title": result["title"],
+                        "engine": data["search_parameters"]["engine"]
+                    }
+                )
+        return results
 
+    def request(self, keywords: str):
+        """
+        """
+        output = list()
+        for engine in self.engines:
+            data = self.serpwow_request(keywords, engine)
+            output.extend(self.parser(data))
 
-# class CandidatesSearcher(object):
+        candidates = {
+            "query": keywords,
+            "candidates": output
+        }
+        json_obj = json.dumps(candidates, indent = 4, ensure_ascii=False)            
+        return json_obj

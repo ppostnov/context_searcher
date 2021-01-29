@@ -17,14 +17,24 @@ def debug_request_definer():
                                       )
           )
 
+def debug_candidates_searcher():
+    """
+    """
+    from request_searcher import candidates_searcher
+    cs = candidates_searcher.CandidatesSearcher(
+        "9B865C39F952484AAE51D0283C79C735"
+    )
+    print(cs.request("разработка прототипа вагона в нии"))    
+
 
 def main():
     """
     Insert a funtion to debug.
     The function must be pre-configured within itself.
     """
-    #debug_candidate_parser()
-    debug_request_definer()
+    # debug_candidate_parser()
+    # debug_request_definer()
+    debug_candidates_searcher()
 
 if __name__ == '__main__':
     main()
