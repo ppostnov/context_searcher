@@ -34,8 +34,8 @@ def main():
     The function must be pre-configured within itself.
     """
     # debug_candidate_parser()
-    debug_request_definer()
-    #debug_candidates_searcher()
+    #debug_request_definer()
+    debug_candidates_searcher()
 
 if __name__ == '__main__':
     main()
