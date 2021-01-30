@@ -13,7 +13,8 @@ def debug_request_definer():
                                       [["Сталь","Медь", "Алюминий"],
                                        'Насос',
                                        ["Вода", "Масло", "Пропан"],
-                                       ["Крым", "Норильск"]]
+                                       ["Крым", "Норильск"]],
+                                      req_len=45
                                       )
           )
 
@@ -33,8 +34,8 @@ def main():
     The function must be pre-configured within itself.
     """
     # debug_candidate_parser()
-    # debug_request_definer()
-    debug_candidates_searcher()
+    debug_request_definer()
+    #debug_candidates_searcher()
 
 if __name__ == '__main__':
     main()

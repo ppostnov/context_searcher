@@ -5,6 +5,7 @@ from nltk.corpus import stopwords
 import string
 import re
 import itertools
+import random
 nltk.download('stopwords')
 
 
@@ -97,7 +98,7 @@ class RequestDefiner:
 
         return morphed
 
-    def request_list(self):
+    def request_list(self, req_len):
         """
         method: return several options or texts for requests based on keywords list
         """
@@ -126,6 +127,12 @@ class RequestDefiner:
         else:
             raise Exception('Request is empty')
 
+        if req_len:
+            if req_len >= len(request):
+                pass
+            else:
+                request = random.sample(request, req_len)
+
         return request
 
 
@@ -138,7 +145,7 @@ class RequestDefiner:
         return []
 
 
-    def data_object(self, req_str: str = '', req_list: list = []):
+    def data_object(self, req_str: str = '', req_list: list = [], req_len=None):
 
         """
         method: create json-like dictionary with request info:
@@ -162,7 +169,7 @@ class RequestDefiner:
         self.tokens = self.define_tokens()
         self.tags = []
         self.lemmatized_tokens = self.define_lemmatized()
-        self.requests = self.request_list()
+        self.requests = self.request_list(req_len)
 
         self.obj_dict = {
             "tags": self.tags,
