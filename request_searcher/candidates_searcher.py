@@ -36,7 +36,7 @@ class CandidatesSearcher(object):
                 )
         return results
 
-    def request(self, keywords: str):
+    def request(self, keywords: str) -> dict:
         """
         """
         output = list()
