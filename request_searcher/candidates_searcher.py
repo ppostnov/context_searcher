@@ -47,6 +47,5 @@ class CandidatesSearcher(object):
         candidates = {
             "query": keywords,
             "candidates": output
-        }
-        json_obj = json.dumps(candidates, indent = 4, ensure_ascii=False)            
-        return json_obj
+        }        
+        return candidates

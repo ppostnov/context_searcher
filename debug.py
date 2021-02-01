@@ -7,7 +7,8 @@ def debug_candidate_parser():
 
 
 def debug_request_definer():
-    from request_searcher import request_definer
+    from request_searcher.request_definer import RequestDefiner
+    request_definer = RequestDefiner()
 
     print(request_definer.data_object(
             req_list=[
@@ -29,6 +30,10 @@ def debug_candidates_searcher():
     )
     print(cs.request("разработка прототипа вагона в нии"))    
 
+def debug_business_logic():
+    from request_searcher import RequestSearcher
+    searcher = RequestSearcher()
+    searcher.search(['Сталь', 'Медь'], 2)
 
 def main():
     """
@@ -36,8 +41,9 @@ def main():
     The function must be pre-configured within itself.
     """
     # debug_candidate_parser()
-    debug_request_definer()
+    # debug_request_definer()
     # debug_candidates_searcher()
+    debug_business_logic()
 
 if __name__ == '__main__':
     main()
