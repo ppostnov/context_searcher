@@ -169,8 +169,8 @@ class WebParser():
         output = {
             "url": self.host_url, #str
             "name": self.title, #str
-            "phone": ';'.join(self.phones), #list
-            "email": ';'.join(self.emails), #list
+            "phone": ';'.join(self.phones), #str
+            "email": ';'.join(self.emails), #str
             "inn": self.inn, #str
             "contacts": self.contact_link, #str
             "description": self.clean_text(self.clean_html)[:4000] #str

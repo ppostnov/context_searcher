@@ -35,6 +35,12 @@ def debug_business_logic():
     searcher = RequestSearcher()
     searcher.search(['Сталь', 'Медь'], 2)
 
+def debug_dict_to_csv():
+    from tools.var_tools import list_of_dicts_to_csv
+    testdict = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4}]
+    list_of_dicts_to_csv(testdict)
+
+
 def main():
     """
     Insert a funtion to debug.
@@ -43,6 +49,7 @@ def main():
     # debug_candidate_parser()
     # debug_request_definer()
     # debug_candidates_searcher()
+    # debug_dict_to_csv()
     debug_business_logic()
 
 if __name__ == '__main__':

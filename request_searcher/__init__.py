@@ -2,6 +2,7 @@ from request_searcher.candidates_parser import WebParser
 from request_searcher.request_definer import RequestDefiner
 from request_searcher.candidates_searcher import CandidatesSearcher
 from request_searcher.similarity import TextComparor
+from tools.var_tools import list_of_dicts_to_csv
 
 from urllib.parse import urlparse
 
@@ -13,6 +14,18 @@ class RequestSearcher():
         self.request_definer = RequestDefiner()
         self.candidates_searcher = CandidatesSearcher(self.SEARCHER_API_KEY)
         self.parser = WebParser()
+
+    @staticmethod
+    def links_to_domains(links: list) -> list:
+        """
+        Converts a list of full links 
+        into a list of domains with scheme
+        """
+        domains = []
+        for link in links:
+            uri = urlparse(link)
+            domains.append(f"{uri.scheme}://{uri.netloc}/")
+        return domains
 
     def define_request(self, req_list: list, req_len: int=None):
         return self.request_definer.data_object(req_list=req_list, 
@@ -37,8 +50,9 @@ class RequestSearcher():
             candidates += self.search_candidates(request).get('candidates')
         links = [candidate.get('link') 
                     for candidate in candidates]
-        links = set(links)
-        parsed = [self.parse_candidate(link) for link in links]
-        print(parsed)
+        domains = self.links_to_domains(links)
+        domains = set(domains)
+        parsed = [self.parse_candidate(domain) for domain in domains]
+        list_of_dicts_to_csv(parsed)
 
         pass
