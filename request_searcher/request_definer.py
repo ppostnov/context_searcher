@@ -88,6 +88,7 @@ class RequestDefiner:
     def define_lemmatized(self):
         """
         method: return lemmitized word-tokens
+        test
         """
 
         morphed = []
