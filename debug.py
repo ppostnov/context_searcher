@@ -1,9 +1,13 @@
 
 def debug_candidate_parser():
     """Calls a web address and prints out the result"""
-    from request_searcher import parser
-    address = 'http://www.stalekom.ru'
-    print(parser.parse(address))
+    from request_searcher import RequestSearcher
+    parser = RequestSearcher()
+    address = 'https://www.youtube.com/'
+    parsed = parser.parse_candidate(address)
+    sampled = parsed['description'].split(' ')[:7]
+    joined = ' '.join(sampled)
+    print(joined, joined.encode('windows-1252').decode('utf-8'))           
 
 
 def debug_request_definer():
@@ -46,11 +50,11 @@ def main():
     Insert a funtion to debug.
     The function must be pre-configured within itself.
     """
-    # debug_candidate_parser()
+    debug_candidate_parser()
     # debug_request_definer()
     # debug_candidates_searcher()
     # debug_dict_to_csv()
-    debug_business_logic()
+    # debug_business_logic()
 
 if __name__ == '__main__':
     main()
