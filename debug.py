@@ -1,13 +1,14 @@
-
+import  chardet
 def debug_candidate_parser():
     """Calls a web address and prints out the result"""
     from request_searcher import RequestSearcher
     parser = RequestSearcher()
-    address = 'https://www.youtube.com/'
+    address='https://taina-svarki.ru/'
     parsed = parser.parse_candidate(address)
     sampled = parsed['description'].split(' ')[:7]
     joined = ' '.join(sampled)
-    print(joined, joined.encode('windows-1252').decode('utf-8'))           
+    print(joined)
+    #print(joined, joined.encode('windows-1252').decode('utf-8'))
 
 
 def debug_request_definer():

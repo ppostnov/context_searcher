@@ -45,6 +45,7 @@ class WebParser():
         except requests.ConnectionError:
             return ''
         if response.status_code == 200:
+            response.encoding = response.apparent_encoding
             return response.text
         else:
             return ''
