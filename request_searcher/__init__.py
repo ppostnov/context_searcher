@@ -3,12 +3,14 @@ from request_searcher.request_definer import RequestDefiner
 from request_searcher.candidates_searcher import CandidatesSearcher
 from request_searcher.similarity import TextComparor
 from tools.var_tools import list_of_dicts_to_csv
+from tools.var_tools import read_text_file
 
 from urllib.parse import urlparse
 
 
 class RequestSearcher():
     SEARCHER_API_KEY = '9B865C39F952484AAE51D0283C79C735'
+    IGNORE_HOSTS = r'metadata\ignore_hosts.txt'
 
     def __init__(self):
         self.request_definer = RequestDefiner()
@@ -24,8 +26,24 @@ class RequestSearcher():
         domains = []
         for link in links:
             uri = urlparse(link)
-            domains.append(f"{uri.scheme}://{uri.netloc}/")
+            if self.is_restricted_domain(uri):
+                domains.append(f"{uri.scheme}://{uri.netloc}/")
         return domains
+
+    def get_restricted_domains(self) -> list:
+        """ignore_hosts.txt to list"""
+        domains = read_text_file(self.IGNORE_HOSTS)
+        return domains.split(',')
+
+    @staticmethod
+    def is_restricted_domain(uri: urlparse) -> bool:
+        """Checks if provided URI is restricted"""
+        restricted_domains = self.get_restricted_domains()
+        for domain in restricted_domains:
+            if domain in uri.netloc.split('.'):
+                return True
+        return False
+
 
     def define_request(self, req_list: list, req_len: int=None):
         return self.request_definer.data_object(req_list=req_list, 

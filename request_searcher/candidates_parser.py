@@ -169,7 +169,7 @@ class WebParser():
     def serialize_output(self):
         output = {
             "url": self.host_url, #str
-            "name": self.title, #str
+            "title": self.title, #str
             "phone": ';'.join(self.phones), #str
             "email": ';'.join(self.emails), #str
             "inn": self.inn, #str

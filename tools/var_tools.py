@@ -11,3 +11,8 @@ def list_of_dicts_to_csv(dictionary: dict, path: str=r'output',
         w = csv.DictWriter(f, keys)
         w.writeheader()
         w.writerows(dictionary)
+
+def read_text_file(filepath: str) -> str:
+    """Reads plane text from a text file"""
+    file = open(filepath, 'r')
+    return file.read()
