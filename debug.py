@@ -31,7 +31,7 @@ def debug_candidates_searcher():
     """
     from request_searcher import candidates_searcher
     cs = candidates_searcher.CandidatesSearcher(
-        "9B865C39F952484AAE51D0283C79C735"
+        ""
     )
     print(cs.request("разработка прототипа вагона в нии"))    
 
