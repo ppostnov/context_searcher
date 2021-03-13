@@ -1,1 +1,1 @@
-yandex, habr, youtube, vk, vkontakte, facebook, livejournal, google, dns, mvideo
+yandex, habr, youtube, vk, vkontakte, facebook, livejournal, google, dns, mvideo, wikipedia

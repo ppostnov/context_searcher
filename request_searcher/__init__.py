@@ -16,8 +16,8 @@ class RequestSearcher():
         self.request_definer = RequestDefiner()
         self.candidates_searcher = CandidatesSearcher(self.SEARCHER_API_KEY)
         self.parser = WebParser()
+        self.restricted_domains = self.get_restricted_domains()
 
-    # @staticmethod
     def links_to_domains(self, links: list) -> list:
         """
         Converts a list of full links 
@@ -32,14 +32,12 @@ class RequestSearcher():
 
     def get_restricted_domains(self) -> list:
         """ignore_hosts.txt to list"""
-        domains = read_text_file(self.IGNORE_HOSTS)
-        return domains.split(',')
+        domains = read_text_file(self.IGNORE_HOSTS).split(',')
+        return [domain.strip() for domain in domains]
 
-    # @staticmethod
     def is_restricted_domain(self, uri: urlparse) -> bool:
         """Checks if provided URI is restricted"""
-        restricted_domains = self.get_restricted_domains()
-        for domain in restricted_domains:
+        for domain in self.restricted_domains:
             if domain in uri.netloc.split('.'):
                 return True
         return False
@@ -71,7 +69,6 @@ class RequestSearcher():
         domains = self.links_to_domains(links)
         domains = set(domains)
         parsed = [self.parse_candidate(domain) for domain in domains]
-        print(parsed)
         list_of_dicts_to_csv(parsed)
 
         pass

@@ -7,7 +7,7 @@ def list_of_dicts_to_csv(dictionary: dict, path: str=r'output',
     rootfolder = os.path.join(os.getcwd(), path)
     fullpath = os.path.join(rootfolder, filename)
     keys = dictionary[0].keys()
-    with open(fullpath, 'w') as f:
+    with open(fullpath, 'w', encoding='utf-8') as f:
         w = csv.DictWriter(f, keys)
         w.writeheader()
         w.writerows(dictionary)
