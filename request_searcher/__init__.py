@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 
 
 class RequestSearcher():
-    SEARCHER_API_KEY = ''
+    SEARCHER_API_KEY = '4358ADF7C4004B4DBA7C47988473BEB3'
     IGNORE_HOSTS = r'metadata\ignore_hosts.txt'
 
     def __init__(self):
@@ -26,7 +26,7 @@ class RequestSearcher():
         domains = []
         for link in links:
             uri = urlparse(link)
-            if self.is_restricted_domain(uri):
+            if not self.is_restricted_domain(uri):
                 domains.append(f"{uri.scheme}://{uri.netloc}/")
         return domains
 
