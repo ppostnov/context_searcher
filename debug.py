@@ -60,8 +60,8 @@ def main():
     # debug_request_definer()
     # debug_candidates_searcher()
     # debug_dict_to_csv()
-    # debug_business_logic()
-    debug_read_text()
+    debug_business_logic()
+    # debug_read_text()
 
 if __name__ == '__main__':
     main()

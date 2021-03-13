@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 
 
 class RequestSearcher():
-    SEARCHER_API_KEY = '9B865C39F952484AAE51D0283C79C735'
+    SEARCHER_API_KEY = '4358ADF7C4004B4DBA7C47988473BEB3'
     IGNORE_HOSTS = r'metadata\ignore_hosts.txt'
 
     def __init__(self):
@@ -17,8 +17,8 @@ class RequestSearcher():
         self.candidates_searcher = CandidatesSearcher(self.SEARCHER_API_KEY)
         self.parser = WebParser()
 
-    @staticmethod
-    def links_to_domains(links: list) -> list:
+    # @staticmethod
+    def links_to_domains(self, links: list) -> list:
         """
         Converts a list of full links 
         into a list of domains with scheme
@@ -35,8 +35,8 @@ class RequestSearcher():
         domains = read_text_file(self.IGNORE_HOSTS)
         return domains.split(',')
 
-    @staticmethod
-    def is_restricted_domain(uri: urlparse) -> bool:
+    # @staticmethod
+    def is_restricted_domain(self, uri: urlparse) -> bool:
         """Checks if provided URI is restricted"""
         restricted_domains = self.get_restricted_domains()
         for domain in restricted_domains:
@@ -71,6 +71,7 @@ class RequestSearcher():
         domains = self.links_to_domains(links)
         domains = set(domains)
         parsed = [self.parse_candidate(domain) for domain in domains]
+        print(parsed)
         list_of_dicts_to_csv(parsed)
 
         pass
