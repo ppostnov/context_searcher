@@ -6,10 +6,11 @@ from tools.var_tools import list_of_dicts_to_csv
 from tools.var_tools import read_text_file
 
 from urllib.parse import urlparse
+import os
 
 
 class RequestSearcher():
-    SEARCHER_API_KEY = ''
+    SEARCHER_API_KEY = "4358ADF7C4004B4DBA7C47988473BEB3"
     IGNORE_HOSTS = r'metadata\ignore_hosts.txt'
 
     def __init__(self):
