@@ -35,11 +35,6 @@ def debug_candidates_searcher():
     )
     print(cs.request("разработка прототипа вагона в нии"))    
 
-def debug_business_logic():
-    from request_searcher import RequestSearcher
-    searcher = RequestSearcher()
-    searcher.search(['Сталь', 'Медь'], 2)
-
 def debug_dict_to_csv():
     from tools.var_tools import list_of_dicts_to_csv
     testdict = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4}]
@@ -50,18 +45,30 @@ def debug_read_text():
     text = read_text_file(r'metadata\ignore_hosts.txt')
     print(text, type(text))
 
+def debug_slugifier():
+    from tools.var_tools import slugify_list
+    input_list = ['пока', 'привет']
+    print(slugify_list(input_list, 90))
+
+def debug_tool():
+    from request_searcher import RequestSearcher
+    searcher = RequestSearcher()
+    query = "чай оптом; пакетированный чай, чай в пакетиках"
+    searcher.search(query.split(';'), 20)
 
 def main():
     """
     Insert a funtion to debug.
     The function must be pre-configured within itself.
     """
+    debug_tool()                     # run everything <----------------
+    
     # debug_candidate_parser()
     # debug_request_definer()
     # debug_candidates_searcher()
     # debug_dict_to_csv()
-    debug_business_logic()
     # debug_read_text()
+    # debug_slugifier()
 
 if __name__ == '__main__':
     main()

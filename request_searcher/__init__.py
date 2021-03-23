@@ -4,6 +4,7 @@ from request_searcher.candidates_searcher import CandidatesSearcher
 from request_searcher.similarity import TextComparor
 from tools.var_tools import list_of_dicts_to_csv
 from tools.var_tools import read_text_file
+from tools.var_tools import slugify_list
 
 from urllib.parse import urlparse
 import os
@@ -57,7 +58,7 @@ class RequestSearcher():
     def compare_text(self):
         pass
 
-    def search(self, req_list: list, req_len: int=1):
+    def search(self, req_list: list, req_len: int=1) -> None:
         """
         UNFINISHED!!!
         """
@@ -70,6 +71,6 @@ class RequestSearcher():
         domains = self.links_to_domains(links)
         domains = set(domains)
         parsed = [self.parse_candidate(domain) for domain in domains]
-        list_of_dicts_to_csv(parsed)
+        list_of_dicts_to_csv(parsed, filename=slugify_list(req_list)+'.csv')
 
         pass
