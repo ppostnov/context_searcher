@@ -10,7 +10,7 @@ import os
 
 
 class RequestSearcher():
-    SEARCHER_API_KEY = "4358ADF7C4004B4DBA7C47988473BEB3"
+    SEARCHER_API_KEY = ""
     IGNORE_HOSTS = r'metadata\ignore_hosts.txt'
 
     def __init__(self):
