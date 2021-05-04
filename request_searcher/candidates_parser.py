@@ -161,6 +161,33 @@ class WebParser():
             contact = ''
         return contact
 
+
+    def fix_encoding(self, string: str, encoding_in='cp1254', encoding_out='utf_8'):
+        """
+        1) Method takes string
+        2) checks if BAD symbols inside
+        3) runs encoding fixer if ANY
+        4) returns input string if NOT
+        :param string: String to check-encode
+        :param encoding_in:
+        :param encoding_out:
+        :return:
+        """
+
+        string = string
+        # trigger for fixing: If suspicious symbol in string  - run fixer
+        if any(x in string for x in ['Ğ', '¢', 'Ğ', '¾', 'Ñ', 'Ğ', '�', 'Ÿ']):
+            trigger = True
+        else:
+            trigger = False
+
+        # Run encoding fixer
+        if trigger:
+            encoded_bytes = string.encode(encoding_in, 'replace')
+            string = encoded_bytes.decode(encoding_out, 'replace')
+            pass
+        return string
+
     def look_for_contact_info(self, clean_html: str='', raw_html=''):
         self.phones = self.find_phone(clean_html)
         self.emails = self.find_email(clean_html)
@@ -169,12 +196,14 @@ class WebParser():
     def serialize_output(self):
         output = {
             "url": self.host_url, #str
-            "title": self.title, #str
+            #"title": self.title, #str
+            "title": self.fix_encoding(self.title), #str
             "phone": ';'.join(self.phones), #str
             "email": ';'.join(self.emails), #str
             "inn": self.inn, #str
             "contacts": self.contact_link, #str
-            "description": self.clean_text(self.clean_html)[:4000] #str
+            #"description": self.clean_text(self.clean_html)[:4000] #str
+            "description": self.fix_encoding(self.clean_text(self.clean_html)[:4000]) #str
         }
         return output
 
